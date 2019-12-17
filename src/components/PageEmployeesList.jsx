@@ -24,7 +24,7 @@ class PageEmployeesList extends React.Component {
     // .then((employees) => this.setState({ employees, isLoading: false }));
     // With Redux
     .then((employees) => {
-      this.props.employeesLoaded(employees);
+      this.props.employeesLoadedlala(employees);
       this.setState({ isLoading: false });
     });
   }
@@ -51,12 +51,13 @@ class PageEmployeesList extends React.Component {
 
 const mapStateToProps = (state /*, ownProps*/) => {
   return {
-    employees: state.employees
+    employees: state.employees//map store state to component prop
   }
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  employeesLoaded: employees => dispatch(employeesLoaded(employees))
+  employeesLoadedlala: employees => dispatch(employeesLoaded(employees))
+  //prop           parameter    functionRedux   action           
 })
 
 export default connect(
