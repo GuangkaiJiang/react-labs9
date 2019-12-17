@@ -18,6 +18,8 @@ class PageEmployeesList extends React.Component {
 
   componentDidMount() {
     console.log(this.props.employees);
+    if(this.props.employees==undefined)
+   {
     this.setState({ isLoading: true });
     fetch('http://localhost:3004/employees')
     .then((data) => data.json())
@@ -27,7 +29,7 @@ class PageEmployeesList extends React.Component {
     .then((employees) => {
       this.props.employeesLoaded(employees);
       this.setState({ isLoading: false });
-    });
+    });}
   }
 
   render() {

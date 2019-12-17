@@ -56,7 +56,8 @@ class PageEmployeeCreate extends React.Component {
       age, 
       company, 
       email };
-
+      this.props.employeesAdded(employee);
+      this.props.history.push("/");
    fetch('http://localhost:3004/employees', {
       method: 'POST', 
       headers: {
@@ -69,8 +70,6 @@ class PageEmployeeCreate extends React.Component {
       if(res.status !== 201) {
         this.setState({ isSaving: false, error: `Saving returned status ${res.status}`})
       } else {
-        this.props.employeesAdded(employee);
-        this.props.history.push("/");
       }
     }); 
 
