@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 import { employeesLoaded } from '../redux/actions'
+import { employeesAdded } from '../redux/actions'
 class PageEmployeeCreate extends React.Component {
   constructor(props) {
     super(props);
@@ -56,7 +57,7 @@ class PageEmployeeCreate extends React.Component {
       company, 
       email };
 
-    fetch('http://localhost:3004/employees', {
+   fetch('http://localhost:3004/employees', {
       method: 'POST', 
       headers: {
         'Content-Type': 'application/json',
@@ -68,9 +69,11 @@ class PageEmployeeCreate extends React.Component {
       if(res.status !== 201) {
         this.setState({ isSaving: false, error: `Saving returned status ${res.status}`})
       } else {
+        this.props.employeesAdded(employee);
         this.props.history.push("/");
       }
-    })  
+    }); 
+
   }
 
   render() {
@@ -98,10 +101,12 @@ class PageEmployeeCreate extends React.Component {
 }
 
 
+
 const mapDispatchToProps = (dispatch) => ({
- // employeesLoaded: employees => dispatch(employeesLoaded(employees))
+  employeesAdded: employee => dispatch(employeesAdded(employee))
   //prop           parameter    functionRedux   action           
 })
+
 export default withRouter(connect(
   null,
   mapDispatchToProps

@@ -16,7 +16,7 @@ const appReducer = (state = initialState, action) => {
     }
     case EMPLOYEES_ADDED: {
       const { newemployee } = action.payload;
-      return {...state, newemployee}
+      return {...state, employees :[...state.employees, newemployee]}
     }
 
 

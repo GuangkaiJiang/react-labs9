@@ -17,6 +17,7 @@ class PageEmployeesList extends React.Component {
   }
 
   componentDidMount() {
+    console.log(this.props.employees);
     this.setState({ isLoading: true });
     fetch('http://localhost:3004/employees')
     .then((data) => data.json())
