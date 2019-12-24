@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 
-import { employeesLoaded } from '../redux/actions'
+import { fetchingOK } from '../redux/actions'
 
 const EmployeeLine = ({ employee }) => <div>{employee.name} ({employee.age} yrs old): {employee.company}</div>
 
@@ -27,7 +27,7 @@ class PageEmployeesList extends React.Component {
     // .then((employees) => this.setState({ employees, isLoading: false }));
     // With Redux
     .then((employees) => {
-      this.props.employeesLoaded(employees);
+      this.props.fetchingOK(employees);
       this.setState({ isLoading: false });
     });}
   }
@@ -59,7 +59,7 @@ const mapStateToProps = (state /*, ownProps*/) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  employeesLoaded: employee => dispatch(employeesLoaded(employee))
+  fetchingOK: employee => dispatch(fetchingOK(employee))
   //prop           parameter    functionRedux   action           
 })
 
