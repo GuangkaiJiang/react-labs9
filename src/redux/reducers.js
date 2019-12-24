@@ -13,7 +13,7 @@ export const initialState = {
 const appReducer = (state = initialState, action) => {
   switch (action.type) {
     case EMPLOYEES_ADDED: {
-      const { newemployee } = action.pxayload;
+      const { newemployee } = action.payload;
       return {...state, employees :[...state.employees, newemployee]}
     }
     case FETCHING: {

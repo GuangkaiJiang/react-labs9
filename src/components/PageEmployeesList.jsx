@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 
-import { fetchingOK } from '../redux/actions'
+import { fetchEmployeesModifyStore } from '../redux/actions'
 
 const EmployeeLine = ({ employee }) => <div>{employee.name} ({employee.age} yrs old): {employee.company}</div>
 
@@ -10,30 +10,14 @@ class PageEmployeesList extends React.Component {
 
   constructor(props) {
     super(props);
-
-    this.state = { 
-      isLoading: false,
-    }
   }
 
   componentDidMount() {
-    console.log(this.props.employees);
-    if(this.props.employees==undefined)
-   {
-    this.setState({ isLoading: true });
-    fetch('http://localhost:3004/employees')
-    .then((data) => data.json())
-    // Without Redux
-    // .then((employees) => this.setState({ employees, isLoading: false }));
-    // With Redux
-    .then((employees) => {
-      this.props.fetchingOK(employees);
-      this.setState({ isLoading: false });
-    });}
+    this.props.fetchEmployeesModifyStore();
   }
 
   render() {
-    const { isLoading } = this.state;
+    const { isLoading } = this.props;
     const { employees } = this.props;
 
     if(isLoading) {
@@ -54,12 +38,15 @@ class PageEmployeesList extends React.Component {
 
 const mapStateToProps = (state /*, ownProps*/) => {
   return {
-    employees: state.employees//map store state to component prop
+    employees: state.employees,//map store state to component prop
+    isLoading:state.isLoading,
+    error:state.error
+
   }
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchingOK: employee => dispatch(fetchingOK(employee))
+  fetchEmployeesModifyStore: employee => dispatch(fetchEmployeesModifyStore(employee))
   //prop           parameter    functionRedux   action           
 })
 
