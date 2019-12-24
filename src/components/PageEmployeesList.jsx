@@ -19,13 +19,20 @@ class PageEmployeesList extends React.Component {
   render() {
     const { isLoading } = this.props;
     const { employees } = this.props;
+    const { error } = this.props;
+    const { user } = this.props;
+
+    if (error) {
+      return <p>{error.message}</p>;
+    }
 
     if(isLoading) {
       return <p>Loading ...</p>
     }
-    
+
     return (
       <div>
+        <div style={{textAlign:'right'}}>{user.full_name}</div>
         <h1>Employees List:</h1>
         {employees && employees.map((employee => <EmployeeLine key={employee._id} employee={employee} />))}
         <Link to="/new">
@@ -40,7 +47,8 @@ const mapStateToProps = (state /*, ownProps*/) => {
   return {
     employees: state.employees,//map store state to component prop
     isLoading:state.isLoading,
-    error:state.error
+    error:state.error,
+    user:state.user
 
   }
 }

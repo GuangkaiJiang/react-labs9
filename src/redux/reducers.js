@@ -2,10 +2,13 @@ import { EMPLOYEES_ADDED } from './constants';
 import { FETCHING } from './constants';
 import { FETCHING_OK } from './constants';
 import { FETCHING_ERROR } from './constants';
+import { USER_LOGIN } from './constants';
+
 export const initialState = {
   employees: [],
   loading: false,
-  error: null
+  error: null,
+  user:[]
 };
 
 // Read this: https://redux.js.org/basics/reducers
@@ -26,6 +29,10 @@ const appReducer = (state = initialState, action) => {
     case FETCHING_ERROR: {
       const { error } = action.payload;
       return {...state,loading: false,error: error};
+    }
+    case USER_LOGIN: {
+      const { user } = action.payload;
+      return {...state,user:user};
     }
     default:
         return state
